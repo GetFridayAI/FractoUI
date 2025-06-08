@@ -1,0 +1,84 @@
+@import "./themes.less";
+
+button {
+  user-select: none;
+  min-width: @mediumWidth;
+  font-size: @smallFont;
+  padding: 0 @smallSpacing;
+  cursor: pointer;
+}
+
+button:hover {
+  box-shadow: 0 0 @microSpacing @shadow;
+}
+
+button.compact {
+  .extraSmallButton();
+}
+
+button.normal {
+  .smallButton();
+}
+
+button.wide {
+  .mediumButton();
+}
+
+button.extra-wide {
+  .largeButton();
+}
+
+button.giant {
+  .extraLargeButton();
+}
+
+button.primary-button {
+  background: @primaryColor;
+  color: @primaryTextColor;
+  border: none;
+}
+
+button.secondary-button {
+  color: @secondaryTextColor;
+  background: @white;
+  border: 1px solid @primaryColor;
+}
+
+button.floating-button {
+  position: fixed;
+  background: @primaryColor;
+  color: @primaryTextColor;
+  border: none;
+
+  &.top-right {
+    top: @largeSpacing;
+    right: @largeSpacing;
+  }
+
+  &.top-left {
+    top: @largeSpacing;
+    left: @largeSpacing;
+  }
+
+  &.bottom-right {
+    bottom: @largeSpacing;
+    right: @largeSpacing;
+  }
+
+  &.bottom-left {
+    bottom: @largeSpacing;
+    left: @largeSpacing;
+  }
+}
+
+button.normal-shape {
+  border-radius: @normalBorderRadius;
+}
+
+button.ellipse-shape {
+  border-radius: @roundedBorderRadius;
+}
+
+button.rounded-shape {
+  border-radius: @roundedBorderRadius;
+}
