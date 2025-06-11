@@ -2,7 +2,7 @@ import { ButtonPosition, ButtonShape, ButtonSize } from '../interfaces/Button';
 import { PrimaryButton } from '../components/Button/PrimaryButton';
 import { SecondaryButton } from '../components/Button/SecondaryButton';
 import { FloatingButton } from '../components/Button/FloatingButton';
-import "./buttonpage.less";
+import "./less/buttonpage.less";
 
 const ButtonPage = () => {
   return (

@@ -1,0 +1,124 @@
+@import "./themes.less";
+
+.dropdown-container p {
+  margin: 0;
+  letter-spacing: @normalLetterSpacing;
+}
+
+.dropdown-container p.dropdown-label {
+  font-size: @extraSmallFont;
+  padding: 0 @microSpacing;
+  margin-bottom: @nanoSpacing;
+}
+
+.dropdown {
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.dropdown.primary {
+  .dropdown-input {
+    background: @primaryColor;
+    color: @primaryTextColor;
+  }
+}
+
+.dropdown.secondary {
+  .dropdown-input {
+    border: 1px solid @primaryColor;
+    color: @secondaryTextColor;
+  }
+}
+
+.dropdown-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: @smallHeight;
+  border: 1px solid @smoke;
+  border-radius: @normalBorderRadius;
+  display: flex;
+  align-items: center;
+  padding-left: @extraSmallSpacing;
+}
+
+.dropdown-icon {
+  margin-left: auto;
+  margin-right: @extraSmallSpacing;
+}
+
+.dropdown.extra-small {
+  .dropdown-input {
+    width: @extraSmallWidth;
+  }
+
+  .dropdown-options {
+    width: @smallWidth;
+  }
+}
+
+.dropdown.small {
+  .dropdown-input, .dropdown-options {
+    width: @smallWidth;
+  }
+}
+
+.dropdown.medium {
+  .dropdown-input, .dropdown-options {
+    width: @mediumWidth;
+  }
+}
+
+.dropdown.large {
+  .dropdown-input, .dropdown-options {
+    width: @largeWidth;
+  }
+}
+
+.dropdown.extraLarge {
+  .dropdown-input, .dropdown-options {
+    width: 100%;
+  }
+}
+
+.dropdown-options {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  border-radius: @normalBorderRadius;
+  background-color: @white;
+  border: 1px solid @lightSmoke;
+}
+
+.dropdown-options.open {
+  opacity: 1;
+  overflow-y: auto;
+  max-height: 20rem;
+}
+
+.dropdown-options.closed {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.dropdown-options .options-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  li {
+    height: @smallHeight;
+    display: flex;
+    align-items: center;
+    padding-left: @smallSpacing;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  li:hover {
+    background-color: @fog;
+  }
+}
