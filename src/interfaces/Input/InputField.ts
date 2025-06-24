@@ -3,6 +3,7 @@ export interface InputFieldProps {
   value: string;
   isDisabled: boolean;
   onChange: (value: string) => void;
+  onFocus?: () => void;
   isRequired?: boolean;
   placeholder?: string;
   debounce?: number;

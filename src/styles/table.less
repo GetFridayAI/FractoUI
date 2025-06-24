@@ -1,0 +1,40 @@
+@import "themes.less";
+
+.table-wrapper table {
+  border-collapse: collapse;
+
+  &.has-grid {
+    th, td {
+      border: 1px solid @lightSmoke;
+    }
+  }
+
+  &.has-select {
+    tbody tr {
+      cursor: pointer;
+
+      &:hover {
+        background: @darkFog;
+      }
+    }
+  }
+
+  th, td {
+    min-width: 150px;
+    text-align: center;
+    line-height: 45px;
+    padding: 0;
+  }
+
+  th:not(:last-child), td:not(:last-child) {
+    border-right: 1px solid @lightSmoke;
+  }
+
+  tr:nth-child(even) {
+    background-color: @fog;
+  }
+
+  th {
+    background: @darkFog;
+  }
+}

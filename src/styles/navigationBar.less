@@ -1,0 +1,61 @@
+@import "themes.less";
+
+.navigation-bar-wrapper {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: @extraLargeHeight;
+  box-shadow: 0 5px 10px @darkFog;
+  margin-bottom: @largeSpacing;
+  display: flex;
+  align-items: center;
+  background: @white;
+
+  .navigation-menu-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: @extraLargeHeight;
+    width: @microWidth;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    padding: 0 10px;
+
+    &:hover, &.active {
+      background-color: @fog;
+    }
+
+    .navigation-menu-item-icon {
+      margin-left: @microSpacing;
+    }
+  }
+
+  .navigation-submenu {
+    position: absolute;
+    top: 100%;
+    background: @white;
+    min-width: @extraSmallWidth;
+    box-shadow: 0 5px 10px @darkFog;
+    cursor: pointer;
+
+    p {
+      margin: 0;
+    }
+
+    .navigation-submenu-item {
+      display: flex;
+      align-items: center;
+      height: @smallHeight;
+      user-select: none;
+      -webkit-user-select: none;
+      padding: 0 @smallSpacing;
+
+      &:hover, &.active {
+        background: @fog;
+      }
+    }
+  }
+}

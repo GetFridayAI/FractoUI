@@ -17,3 +17,16 @@
   box-shadow: none;
   font-size: @mediumFont;
 }
+
+.text-field-container.text-field-wrapper {
+  padding: 1px;
+  border: 2px solid rgba(255, 255, 255, 0);
+
+  &.focused {
+    border: 2px solid @secondaryColor;
+  }
+
+  &.hasError {
+    border: 2px solid @error;
+  }
+}
