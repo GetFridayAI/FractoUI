@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import TextField from '../../components/Input/TextField';
+import { TextField } from '../../components/Input/TextField';
 import "../less/inputFieldPages.less";
 
 const TextFieldPage = () => {

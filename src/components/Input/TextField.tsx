@@ -3,7 +3,7 @@ import { TextFieldProps } from '../../interfaces/Input/TextField';
 import InputField from './InputField';
 import { FocusEvent, useEffect, useRef, useState } from 'react';
 
-const TextField = (props: TextFieldProps) => {
+export const TextField = (props: TextFieldProps) => {
   const elClassNames: string = "text-field-wrapper " + (props.className ? props.className : "");
   const textFieldRef = useRef<HTMLDivElement>(null);
   const [hasFocus, setHasFocus] = useState<boolean>(false);
@@ -47,5 +47,3 @@ const TextField = (props: TextFieldProps) => {
     </div>
   );
 }
-
-export default TextField;

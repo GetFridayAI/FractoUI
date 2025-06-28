@@ -1,6 +1,6 @@
 import '../../styles/navigationBar.less';
 import { NavigationBarProps, NavigationMenuItem } from '../../interfaces/NavigationBar';
-import SystemIcon from '../IconPack/SystemIcon';
+import { SystemIcon } from '../IconPack/SystemIcon';
 import { SystemIconTypes } from '../../interfaces/SystemIcon';
 import { useState } from 'react';
 
