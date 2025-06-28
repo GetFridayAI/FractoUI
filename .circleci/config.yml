@@ -1,0 +1,72 @@
+version: 2.1
+
+executors:
+  node_executor:
+    docker:
+      - image: cimg/node:22.16.0
+    working_directory: ~/repo
+
+jobs:
+  checkout_code:
+    executor: node_executor
+    steps:
+      - checkout
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
+
+  build_app:
+    executor: node_executor
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Install dependencies
+          command: npm install
+      - run:
+          name: Build
+          command: npm run build
+      - persist_to_workspace:
+          root: .
+          paths:
+            - build
+
+  run_tests:
+    executor: node_executor
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Install dependencies
+          command: npm install
+      - run:
+          name: Run Jest tests
+          command: npm test -- --ci --coverage
+
+  release_app:
+    executor: node_executor
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Release
+          command: |
+            echo "Releasing build..."
+            # e.g., npm publish, gh release, or deploy script
+
+workflows:
+  version: 2
+  react-app-pipeline:
+    jobs:
+      - checkout_code
+      - build_app:
+          requires:
+            - checkout_code
+      - run_tests:
+          requires:
+            - checkout_code
+      - release_app:
+          requires:
+            - build_app
+            - run_tests
