@@ -1,5 +1,5 @@
 import * as React from 'react';
-const SvgMinimize2 = (props) => (
+const SvgMinimize2 = (props: any) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={24}

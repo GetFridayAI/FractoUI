@@ -37,7 +37,7 @@ const DropdownPage = () => {
         <div className="dropdown-wrapper">
           <Dropdown
             label={"Dropdown Label"}
-            placeholder={"Dropdown Placeholder"}
+            placeholder={""}
             options={options}
             hasError={false}
             errorMessage={""}

@@ -1,5 +1,5 @@
 import '../../styles/navigationBar.less';
-import { NavigationBarProps, NavigationInteractionStyle, NavigationMenuItem } from '../../interfaces/NavigationBar';
+import { NavigationBarProps, NavigationMenuItem } from '../../interfaces/NavigationBar';
 import SystemIcon from '../IconPack/SystemIcon';
 import { SystemIconTypes } from '../../interfaces/SystemIcon';
 import { useState } from 'react';
@@ -11,11 +11,17 @@ const NavigationBar = (props: NavigationBarProps) => {
 
   return (
     <div className={elClassNames}>
+      <div className={"app-icon"}>
+        {props.icon}
+      </div>
       {
         props.menuItems.map((menuItem: NavigationMenuItem, index) => {
           return <div
             className={"navigation-bar-item"}
             key={index}
+            onClick={() => {
+              !menuItem.subMenuOptions && menuItem.onNavigate && menuItem.onNavigate(menuItem.route ?? "");
+            }}
             onMouseEnter={() => setActiveMenuItem(index)}
             onMouseLeave={() => setActiveMenuItem(null)}>
             <div className={`navigation-menu-item ${activeMenuItem === index ? 'active':''}`}>

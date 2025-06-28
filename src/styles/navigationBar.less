@@ -10,7 +10,13 @@
   margin-bottom: @largeSpacing;
   display: flex;
   align-items: center;
-  background: @white;
+  background: @navbarBackground;
+
+  .app-icon {
+    margin-left: @largeSpacing;
+    user-select: none;
+    -webkit-user-select: none;
+  }
 
   .navigation-menu-item {
     display: flex;
@@ -26,6 +32,75 @@
 
     &:hover, &.active {
       background-color: @fog;
+    }
+
+    .navigation-menu-item-icon {
+      margin-left: @microSpacing;
+    }
+  }
+
+  .navigation-submenu {
+    position: absolute;
+    top: 100%;
+    background: @white;
+    min-width: @extraSmallWidth;
+    box-shadow: 0 5px 10px @darkFog;
+    cursor: pointer;
+
+    p {
+      margin: 0;
+    }
+
+    .navigation-submenu-item {
+      display: flex;
+      align-items: center;
+      height: @smallHeight;
+      user-select: none;
+      -webkit-user-select: none;
+      padding: 0 @smallSpacing;
+
+      &:hover, &.active {
+        background: @fog;
+      }
+    }
+  }
+}
+
+.side-bar-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: @largeWidth;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background: @sidebarBackground;
+  color: @sidebarFontColor;
+
+  .app-icon {
+    margin: @largeSpacing 0;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  .navigation-bar-item {
+    width: 100%;
+  }
+
+  .navigation-menu-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: @extraLargeHeight;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+
+    &:hover, &.active {
+      background-color: @charcoal;
     }
 
     .navigation-menu-item-icon {

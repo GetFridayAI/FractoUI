@@ -1,5 +1,5 @@
 import * as React from 'react';
-const SvgRss = (props) => (
+const SvgRss = (props: any) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={24}

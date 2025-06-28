@@ -4,8 +4,8 @@ import SearchPage from './InputFields/SearchPage';
 import TextFieldPage from './InputFields/TextFieldPage';
 import './less/gallery.less';
 import TablePage from './TablePage';
-import NavigationBar from '../components/Navigation/NavigationBar';
 import { NavigationBarPosition, NavigationMenuItem } from '../interfaces/NavigationBar';
+import SideBar from '../components/Navigation/SideBar';
 
 const Gallery = () => {
     const inputMenuItems: Array<NavigationMenuItem> = [
@@ -53,11 +53,19 @@ const Gallery = () => {
       }
     ];
 
+    const icon = <span>App Icon | Sample</span>
+
     return (
       <div className={"page-container"}>
-        <NavigationBar
+        {/* <NavigationBar
           menuItems={navigationMenuItems}
           navigationBarPosition={NavigationBarPosition.TOP}
+          icon={icon}
+        />*/}
+        <SideBar
+          navigationBarPosition={NavigationBarPosition.LEFT}
+          menuItems={navigationMenuItems}
+          icon={icon}
         />
         <div className="page-content">
             <ButtonPage />

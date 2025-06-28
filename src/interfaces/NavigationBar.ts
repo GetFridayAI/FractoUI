@@ -3,6 +3,7 @@ export interface NavigationBarProps {
   navigationBarPosition: NavigationBarPosition;
   menuItems: Array<NavigationMenuItem>;
   icon?: any;
+  footerMenu?: readonly [NavigationMenuItem, NavigationMenuItem];
 }
 
 export enum NavigationBarPosition {
@@ -14,4 +15,21 @@ export interface NavigationMenuItem {
   menuTitle: string;
   subMenuOptions?: Array<NavigationMenuItem>;
   route?: string;
+  onNavigate?: (url: string) => void;
+}
+
+export interface SidebarProps extends NavigationBarProps {
+  expandCollapseIconPlacement: SidebarMenuToggleIconPlacement;
+  showNotifications: boolean;
+  notificationType: SidebarMenuItemNotificationType;
+}
+
+export enum SidebarMenuToggleIconPlacement {
+  LEFT = 'left',
+  RIGHT = 'right'
+}
+
+export enum SidebarMenuItemNotificationType {
+  Indicator = 0,
+  Numeric = 1
 }

@@ -1,5 +1,5 @@
 import * as React from 'react';
-const SvgUserX = (props) => (
+const SvgUserX = (props: any) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={24}

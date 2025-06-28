@@ -4,7 +4,7 @@ import Gallery from './pages/Gallery';
 function App() {
     return (
           <Routes>
-              <Route path="/" element={<Gallery />} />
+            <Route path="/" element={<Gallery />} />
           </Routes>
     );
 }
