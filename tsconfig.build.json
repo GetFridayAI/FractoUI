@@ -1,0 +1,19 @@
+{
+  "extends": "./tsconfig.json",
+  "include": [
+    "src/index.ts",
+    "src/assets",
+    "src/components",
+    "src/interfaces",
+    "src/styles"
+  ],
+  "exclude": [
+    "src/pages",
+    "src/tests"
+  ],
+  "compilerOptions": {
+    "outDir": "dist",
+    "declaration": true,
+    "emitDeclarationOnly": false
+  }
+}

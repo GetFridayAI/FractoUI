@@ -1,0 +1,40 @@
+@import "./themes.less";
+
+.card-wrapper {
+  user-select: none;
+  -webkit-user-select: none;
+  position: relative;
+
+  .disabled-wrapper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: @fog;
+    z-index: 1;
+    opacity: 0.4;
+  }
+
+  .card-content {
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    padding: @extraSmallSpacing;
+
+    &.has-shadow {
+      border: 1px solid @fog;
+      box-shadow: 0 0 10px @darkFog;
+    }
+
+    .card-header {
+      margin-bottom: @extraSmallSpacing;
+    }
+
+    .card-description {
+      margin-top: @microSpacing;
+    }
+  }
+
+  h3 {
+    margin: 0;
+  }
+}

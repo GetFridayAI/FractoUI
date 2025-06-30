@@ -1,13 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
-import App from './App';
-import './styles/button.less';
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-    <React.StrictMode>
+async function init() {
+  const root = ReactDOM.createRoot(document.getElementById('root')!);
+
+  if (import.meta.env.MODE === 'development') {
+    const { default: App } = await import('./App');
+
+    root.render(
+      <React.StrictMode>
         <BrowserRouter>
-            <App />
+          <App />
         </BrowserRouter>
-    </React.StrictMode>
-);
+      </React.StrictMode>
+    );
+  }
+}
+
+init();
