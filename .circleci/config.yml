@@ -64,6 +64,24 @@ jobs:
           name: Run Jest tests
           command: npm test -- --ci --coverage
 
+  bundle_app:
+    executor: node_executor
+    steps:
+      - attach_workspace:
+          at: .
+      - restore_node_cache
+      - run:
+          name: Install dependencies
+          command: npm install
+      - run:
+          name: Build npm package
+          command: npm pack
+      - run:
+          name: Verify npm package
+          command: |
+            TGZ=$(npm pack | tail -n1)
+            test -f "$TGZ" && echo "✅ Found $TGZ" || (echo "❌ NPM package not found" && exit 1)
+
   release_app:
     executor: node_executor
     steps:
@@ -71,13 +89,24 @@ jobs:
           at: .
       - run:
           name: Release
-          command: |
-            echo "Releasing build..."
-            # e.g., npm publish, gh release, or deploy script
+          command: npm publish --access public
+
+  tag_release:
+    executor: node_executor
+    steps:
+      - run: |
+          VERSION=$(node -p "require('./package.json').version")
+          TAG="v$VERSION"
+          echo "Creating tag $TAG"
+          
+          git config --global user.email "ci@circleci.com"
+          git config --global user.name "circleci"
+          git tag "$TAG"
+          git push origin "$TAG"
 
 workflows:
   version: 2
-  fractoui-ci-pipeline:
+  fracto-ui-ci-pipeline:
     jobs:
       - checkout_code
       - build_app:
@@ -86,10 +115,26 @@ workflows:
       - run_tests:
           requires:
             - checkout_code
-      - release_app:
+      - bundle_app:
           requires:
             - build_app
             - run_tests
+      - hold_approval:
+          type: approval
+          requires:
+            - bundle_app
           filters:
             branches:
-              only: main
+              only: releases
+      - release_app:
+          requires:
+            - hold_approval
+          filters:
+            branches:
+              only: releases
+      - tag_release:
+          requires:
+            - release_app
+          filters:
+            branches:
+              only: releases
