@@ -19,7 +19,7 @@ const CardsPage = () => {
           <SimpleCard
             title="Basic Card"
             hasShadow={true}
-            isDisabled={false}
+            isDisabled={true}
           />
           <br /><br />
           <Card
