@@ -116,8 +116,12 @@ jobs:
           git push origin "$TAG"
 
 workflows:
-  version: 2
-  fracto-ui-ci-pipeline:
+  version: 2.1
+  ci-pipeline-workflow:
+    when:
+      or:
+        - equal: [ main, << pipeline.git.branch >> ]
+        - equal: [ releases, << pipeline.git.branch >> ]
     jobs:
       - checkout_code:
           filters: *x_main_and_releases_filter
@@ -147,3 +151,22 @@ workflows:
           requires:
             - release_app
           filters: *x_releases_filter
+
+  pr-pipeline-workflow:
+    when:
+      not:
+        or:
+          - equal: [ main, << pipeline.git.branch >> ]
+          - equal: [ releases, << pipeline.git.branch >> ]
+    jobs:
+      - checkout_code
+      - build_app:
+          requires:
+            - checkout_code
+      - run_tests:
+          requires:
+            - checkout_code
+      - bundle_app:
+          requires:
+            - build_app
+            - run_tests
