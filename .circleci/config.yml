@@ -6,12 +6,6 @@ executors:
       - image: cimg/node:22.16.0
     working_directory: ~/repo
 
-x-main-and-releases-filter: &main_and_releases_filter
-  branches:
-    only:
-      - main
-      - releases
-
 x-releases-filter: &x_releases_filter
   branches:
     only:
@@ -118,22 +112,23 @@ jobs:
 workflows:
   version: 2
   fracto-ui-ci-pipeline:
+    when:
+      condition:
+        or:
+          - equal: [ "<< pipeline.git.branch >>", "main" ]
+          - matches: [ "<< pipeline.git.branch >>", "releases" ]
     jobs:
-      - checkout_code:
-          filters: *main_and_releases_filter
+      - checkout_code
       - build_app:
           requires:
             - checkout_code
-          filters: *main_and_releases_filter
       - run_tests:
           requires:
             - checkout_code
-          filters: *main_and_releases_filter
       - bundle_app:
           requires:
             - build_app
             - run_tests
-          filters: *main_and_releases_filter
       - hold_approval:
           type: approval
           requires:
