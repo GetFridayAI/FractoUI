@@ -11,6 +11,12 @@ x-releases-filter: &x_releases_filter
     only:
       - releases
 
+x-main-and-releases-filter: &x_main_and_releases_filter
+  branches:
+    only:
+      - main
+      - releases
+
 # Reusable step for dependency caching
 commands:
   restore_node_cache:
@@ -114,25 +120,20 @@ workflows:
   fracto-ui-ci-pipeline:
     jobs:
       - checkout_code:
-          filters:
-            branches:
-              only:
-                - main
-                - releases
-            pull_requests:
-              only:
-                - main
-                - releases
+          filters: *x_main_and_releases_filter
       - build_app:
           requires:
             - checkout_code
+          filters: *x_main_and_releases_filter
       - run_tests:
           requires:
             - checkout_code
+          filters: *x_main_and_releases_filter
       - bundle_app:
           requires:
             - build_app
             - run_tests
+          filters: *x_main_and_releases_filter
       - hold_approval:
           type: approval
           requires:
