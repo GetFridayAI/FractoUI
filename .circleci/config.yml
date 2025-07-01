@@ -6,6 +6,17 @@ executors:
       - image: cimg/node:22.16.0
     working_directory: ~/repo
 
+x-main-and-releases-filter: &main_and_releases_filter
+  branches:
+    only:
+      - main
+      - releases
+
+x-releases-filter: &x_releases_filter
+  branches:
+    only:
+      - releases
+
 # Reusable step for dependency caching
 commands:
   restore_node_cache:
@@ -49,7 +60,7 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            - build
+            - dist
 
   run_tests:
     executor: node_executor
@@ -108,33 +119,31 @@ workflows:
   version: 2
   fracto-ui-ci-pipeline:
     jobs:
-      - checkout_code
+      - checkout_code:
+          filters: *main_and_releases_filter
       - build_app:
           requires:
             - checkout_code
+          filters: *main_and_releases_filter
       - run_tests:
           requires:
             - checkout_code
+          filters: *main_and_releases_filter
       - bundle_app:
           requires:
             - build_app
             - run_tests
+          filters: *main_and_releases_filter
       - hold_approval:
           type: approval
           requires:
             - bundle_app
-          filters:
-            branches:
-              only: releases
+          filters: *x_releases_filter
       - release_app:
           requires:
             - hold_approval
-          filters:
-            branches:
-              only: releases
+          filters: *x_releases_filter
       - tag_release:
           requires:
             - release_app
-          filters:
-            branches:
-              only: releases
+          filters: *x_releases_filter
