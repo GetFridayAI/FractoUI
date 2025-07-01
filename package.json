@@ -1,12 +1,31 @@
 {
   "name": "@featured.pixels/fracto-ui",
-  "version": "0.1.0",
-  "private": true,
+  "version": "0.2.0",
+  "description": "Re-usable UI elements",
+  "keywords": [ "ui", "elements", "components" ],
+  "author": "Featured Pixels",
+  "license": "MIT",
+  "private": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GetFridayAI/FractoUI.git"
+  },
+  "bugs": {
+    "url": "https://github.com/GetFridayAI/FractoUI/issues"
+  },
+  "homepage": "https://github.com/GetFridayAI/FractoUI#readme",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.es.js",
+  "types": "dist/index.d.ts",
+  "files": ["dist", "src/styles/**/*.less"],
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:types": "tsc -p tsconfig.build.json",
+    "build:less": "cp -R src/styles dist/styles",
     "preview": "vite preview",
-    "test": "jest src/tests"
+    "test": "jest src/tests",
+    "prepublish": "npm run build && npm run build:types && npm run build:less"
   },
   "dependencies": {
     "axios": "^1.6.0",
@@ -36,21 +55,7 @@
     "typescript": "^5.3.3",
     "vite": "^5.0.8"
   },
-  "description": "Re-usable UI elements",
-  "main": "components/index.ts",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/GetFridayAI/FractoUI.git"
-  },
-  "keywords": [
-    "ui",
-    "elements",
-    "components"
-  ],
-  "author": "Featured Pixels",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/GetFridayAI/FractoUI/issues"
-  },
-  "homepage": "https://github.com/GetFridayAI/FractoUI#readme"
+  "publishConfig": {
+    "access": "public"
+  }
 }

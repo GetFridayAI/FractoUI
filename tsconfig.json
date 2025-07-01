@@ -11,7 +11,12 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "baseUrl": "./src",
-    "noCheck": false
+    "noCheck": false,
+    "declaration": true,
+    "declarationDir": "dist",
+    "emitDeclarationOnly": true,
+    "outDir": "dist",
+    "types": ["vite/client"]
   },
   "include": ["src", "src/tests/setup.ts"]
 }

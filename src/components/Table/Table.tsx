@@ -1,7 +1,7 @@
 import "../../styles/table.less";
 import { TableProps } from '../../interfaces/Table';
 
-const Table = (props: TableProps) => {
+export const Table = (props: TableProps) => {
   const elClassNames: string = "table-wrapper " + (props.className ? props.className : "");
 
   return (
@@ -39,5 +39,3 @@ const Table = (props: TableProps) => {
     </div>
   );
 }
-
-export default Table;

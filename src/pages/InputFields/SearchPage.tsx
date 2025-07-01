@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import SearchField from '../../components/Input/SearchField';
+import { SearchField } from '../../components/Input/SearchField';
 import "../less/inputFieldPages.less";
 
 const SearchFieldPage = () => {

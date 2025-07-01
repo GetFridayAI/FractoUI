@@ -1,10 +1,10 @@
 import '../../styles/navigationBar.less';
 import { NavigationBarProps, NavigationMenuItem } from '../../interfaces/NavigationBar';
-import SystemIcon from '../IconPack/SystemIcon';
+import { SystemIcon } from '../IconPack/SystemIcon';
 import { SystemIconTypes } from '../../interfaces/SystemIcon';
 import { useState } from 'react';
 
-const NavigationBar = (props: NavigationBarProps) => {
+export const NavigationBar = (props: NavigationBarProps) => {
   const elClassNames: string = "navigation-bar-wrapper " + (props.className ? props.className + " " : "") + (props.navigationBarPosition);
   const [activeMenuItem, setActiveMenuItem] = useState<number | null>(null);
   const [activeSubmenuItem, setActiveSubmenuItem] = useState<number | null>(null);
@@ -53,5 +53,3 @@ const NavigationBar = (props: NavigationBarProps) => {
     </div>
   );
 }
-
-export default NavigationBar;

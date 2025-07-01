@@ -6,6 +6,7 @@ import './less/gallery.less';
 import TablePage from './TablePage';
 import { NavigationBarPosition, NavigationMenuItem } from '../interfaces/NavigationBar';
 import SideBar from '../components/Navigation/SideBar';
+import CardsPage from './CardsPage';
 
 const Gallery = () => {
     const inputMenuItems: Array<NavigationMenuItem> = [
@@ -73,6 +74,7 @@ const Gallery = () => {
             <SearchPage />
             <TextFieldPage />
             <TablePage />
+            <CardsPage />
         </div>
       </div>
     );

@@ -2,7 +2,7 @@ import { SystemIconProps } from '../../interfaces/SystemIcon';
 import { SystemIconMap } from './Icons';
 import "../../styles/systemIcon.less";
 
-const SystemIcon = (props: SystemIconProps) => {
+export const SystemIcon = (props: SystemIconProps): JSX.Element => {
   const IconComponent = SystemIconMap[props.iconType];
 
   return (
@@ -11,5 +11,3 @@ const SystemIcon = (props: SystemIconProps) => {
     </div>
   );
 }
-
-export default SystemIcon;

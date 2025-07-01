@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import Gallery from './pages/Gallery';
 
-function App() {
+const App = (): JSX.Element => {
     return (
           <Routes>
             <Route path="/" element={<Gallery />} />

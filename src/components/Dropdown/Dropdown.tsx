@@ -1,10 +1,10 @@
 import { useRef, useState } from 'react';
 import { DropdownProps, DropdownSize, DropdownTheme } from '../../interfaces/Dropdown';
 import '../../styles/dropdown.less';
-import SystemIcon from '../IconPack/SystemIcon';
+import { SystemIcon } from '../IconPack/SystemIcon';
 import { SystemIconTypes } from '../../interfaces/SystemIcon';
 
-export const Dropdown = (props: DropdownProps) => {
+export const Dropdown = (props: DropdownProps): JSX.Element => {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState(false);
 

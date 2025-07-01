@@ -1,11 +1,11 @@
 import { useEffect, useRef } from 'react';
-import SystemIcon from '../IconPack/SystemIcon';
+import { SystemIcon } from '../IconPack/SystemIcon';
 import { SystemIconTypes } from '../../interfaces/SystemIcon';
 import "../../styles/searchField.less";
 import { SearchFieldProps } from '../../interfaces/Input/SearchField';
 import InputField from './InputField';
 
-const SearchField = (props: SearchFieldProps) => {
+export const SearchField = (props: SearchFieldProps) => {
   const searchContainerRef = useRef<HTMLDivElement>(null);
   const dismissSearchRef = useRef<HTMLDivElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
@@ -34,5 +34,3 @@ const SearchField = (props: SearchFieldProps) => {
     </div>
   );
 }
-
-export default SearchField;

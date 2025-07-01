@@ -1,7 +1,7 @@
 export interface ButtonProps {
   text: string;
   onClick: () => void;
-  type: string;
+  type: ButtonType;
   disabled: boolean;
   className?: string;
   id?: string;
@@ -9,6 +9,8 @@ export interface ButtonProps {
   position?: ButtonPosition;
   shape?: ButtonShape;
 }
+
+export type ButtonType = "button" | "submit" | "reset" | undefined;
 
 export enum ButtonSize {
   Compact = 1,

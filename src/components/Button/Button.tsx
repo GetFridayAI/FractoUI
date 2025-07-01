@@ -1,8 +1,12 @@
-import { ButtonPosition, ButtonProps, ButtonShape, ButtonSize } from '../../interfaces/Button';
+import { ButtonPosition, ButtonProps, ButtonShape, ButtonSize, ButtonType } from '../../interfaces/Button';
 import '../../styles/button.less';
 
 export const Button = (props: ButtonProps) => {
-    const getButtonSizeClass = (size: ButtonSize) => {
+    const getButtonSizeClass = (size: ButtonSize | undefined) => {
+        if (!size) {
+            return "normal";
+        }
+
         switch (size) {
             case ButtonSize.Compact:
                 return "compact";
@@ -19,7 +23,11 @@ export const Button = (props: ButtonProps) => {
         }
     }
 
-    const getButtonShapeClass = (shape: ButtonShape) => {
+    const getButtonShapeClass = (shape: ButtonShape | undefined) => {
+        if (!shape) {
+            return "normal-shape";
+        }
+
         switch (shape) {
             case ButtonShape.Normal:
                 return "normal-shape";
@@ -49,7 +57,7 @@ export const Button = (props: ButtonProps) => {
       + (getButtonSizeClass(props.size) + " " )
       + (props.position ? getButtonPositionClass(props.position) + " " : "")
       + (getButtonShapeClass(props.shape));
-    const buttonType: string = props.type ? props.type : "button";
+    const buttonType: ButtonType = props.type ? props.type : "button";
 
     return (
         <button
