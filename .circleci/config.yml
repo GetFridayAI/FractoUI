@@ -16,10 +16,6 @@ x-main-and-releases-filter: &x_main_and_releases_filter
     only:
       - main
       - releases
-  pull_requests:
-    only:
-      - main
-      - releases
 
 # Reusable step for dependency caching
 commands:
