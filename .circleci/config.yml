@@ -116,7 +116,7 @@ workflows:
       condition:
         or:
           - equal: [ "<< pipeline.git.branch >>", "main" ]
-          - matches: [ "<< pipeline.git.branch >>", "releases" ]
+          - equal: [ "<< pipeline.git.branch >>", "releases" ]
     jobs:
       - checkout_code
       - build_app:
