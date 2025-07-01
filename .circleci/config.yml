@@ -116,7 +116,9 @@ workflows:
       - checkout_code:
           filters:
             branches:
-              ignore: /.*/
+              only:
+                - main
+                - releases
             pull_requests:
               only:
                 - main
