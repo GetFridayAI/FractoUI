@@ -151,22 +151,3 @@ workflows:
           requires:
             - release_app
           filters: *x_releases_filter
-
-  pr-pipeline-workflow:
-    when:
-      not:
-        or:
-          - equal: [ main, << pipeline.git.branch >> ]
-          - equal: [ releases, << pipeline.git.branch >> ]
-    jobs:
-      - checkout_code
-      - build_app:
-          requires:
-            - checkout_code
-      - run_tests:
-          requires:
-            - checkout_code
-      - bundle_app:
-          requires:
-            - build_app
-            - run_tests
