@@ -17,7 +17,7 @@ const CardsPage = () => {
         <h3>Cards</h3>
         <div className="cards-wrapper">
           <SimpleCard
-            title="Basic Cards"
+            title="Basic Card"
             hasShadow={true}
             isDisabled={false}
           />
