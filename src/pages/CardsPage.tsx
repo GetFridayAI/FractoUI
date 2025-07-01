@@ -4,7 +4,7 @@ import { Card } from '../components';
 
 const CardsPage = () => {
   const cardHeader = <>
-    <div>Some Headers</div>
+    <div>Some Header</div>
   </>
 
   const cardBody = <>
