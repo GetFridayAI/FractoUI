@@ -1,9 +1,16 @@
 import "../../styles/card.less";
 import { CardProps } from "../../interfaces/Card";
+import { useEffect } from 'react';
 
 export const Card = (props: CardProps) => {
   const elClassNames: string = "card-wrapper "
     + (props.className ? props.className : "");
+
+  useEffect(() => {
+    if (!props.cardHeader && !props.title && !props.description) {
+      throw new Error("No content has been passed for the component! Consider passing either one of title, description or header props");
+    }
+  }, []);
 
   return (
     <div className={elClassNames}>

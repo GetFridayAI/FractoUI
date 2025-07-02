@@ -1,9 +1,16 @@
 import "../../styles/card.less";
 import { SimpleCardProps } from "../../interfaces/Card";
+import { useEffect } from 'react';
 
 export const SimpleCard = (props: SimpleCardProps) => {
   const elClassNames: string = "card-wrapper simple-card "
     + (props.className ? props.className : "");
+
+  useEffect(() => {
+    if (!props.title) {
+      throw new Error("Title prop is required for Simple Card, but is missing!");
+    }
+  }, []);
 
   return (
     <div className={elClassNames}>
