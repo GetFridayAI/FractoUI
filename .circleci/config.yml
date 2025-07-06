@@ -1,0 +1,153 @@
+version: 2.1
+
+executors:
+  node_executor:
+    docker:
+      - image: cimg/node:22.16.0
+    working_directory: ~/repo
+
+x-releases-filter: &x_releases_filter
+  branches:
+    only:
+      - releases
+
+x-main-and-releases-filter: &x_main_and_releases_filter
+  branches:
+    only:
+      - main
+      - releases
+
+# Reusable step for dependency caching
+commands:
+  restore_node_cache:
+    steps:
+      - restore_cache:
+          name: Restore node_modules cache
+          keys:
+            - node-modules-{{ checksum "package-lock.json" }}
+            - node-modules-
+
+  save_node_cache:
+    steps:
+      - save_cache:
+          name: Save node_modules cache
+          paths:
+            - node_modules
+          key: node-modules-{{ checksum "package-lock.json" }}
+
+jobs:
+  checkout_code:
+    executor: node_executor
+    steps:
+      - checkout
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
+
+  build_app:
+    executor: node_executor
+    steps:
+      - attach_workspace:
+          at: .
+      - save_node_cache
+      - run:
+          name: Install dependencies
+          command: npm install
+      - run:
+          name: Build
+          command: npm run build
+      - persist_to_workspace:
+          root: .
+          paths:
+            - dist
+
+  run_tests:
+    executor: node_executor
+    steps:
+      - attach_workspace:
+          at: .
+      - restore_node_cache
+      - run:
+          name: Install dependencies
+          command: npm install
+      - run:
+          name: Run Jest tests
+          command: npm test -- --ci --coverage
+
+  bundle_app:
+    executor: node_executor
+    steps:
+      - attach_workspace:
+          at: .
+      - restore_node_cache
+      - run:
+          name: Install dependencies
+          command: npm install
+      - run:
+          name: Build npm package
+          command: npm pack
+      - run:
+          name: Verify npm package
+          command: |
+            TGZ=$(npm pack | tail -n1)
+            test -f "$TGZ" && echo "✅ Found $TGZ" || (echo "❌ NPM package not found" && exit 1)
+
+  release_app:
+    executor: node_executor
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Release
+          command: npm publish --access public
+
+  tag_release:
+    executor: node_executor
+    steps:
+      - run: |
+          VERSION=$(node -p "require('./package.json').version")
+          TAG="v$VERSION"
+          echo "Creating tag $TAG"
+          
+          git config --global user.email "ci@circleci.com"
+          git config --global user.name "circleci"
+          git tag "$TAG"
+          git push origin "$TAG"
+
+workflows:
+  version: 2.1
+  ci-pipeline-workflow:
+    when:
+      or:
+        - equal: [ main, << pipeline.git.branch >> ]
+        - equal: [ releases, << pipeline.git.branch >> ]
+    jobs:
+      - checkout_code:
+          filters: *x_main_and_releases_filter
+      - build_app:
+          requires:
+            - checkout_code
+          filters: *x_main_and_releases_filter
+      - run_tests:
+          requires:
+            - checkout_code
+          filters: *x_main_and_releases_filter
+      - bundle_app:
+          requires:
+            - build_app
+            - run_tests
+          filters: *x_main_and_releases_filter
+      - hold_approval:
+          type: approval
+          requires:
+            - bundle_app
+          filters: *x_releases_filter
+      - release_app:
+          requires:
+            - hold_approval
+          filters: *x_releases_filter
+      - tag_release:
+          requires:
+            - release_app
+          filters: *x_releases_filter
