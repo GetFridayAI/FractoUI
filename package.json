@@ -1,7 +1,7 @@
 {
   "name": "@featured.pixels/fracto-ui",
   "version": "0.2.0",
-  "description": "Re-usable UI elements",
+  "description": "Re-usable UI elements for FridayAI apps",
   "keywords": [
     "ui",
     "elements",
@@ -65,5 +65,6 @@
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "isNpmModule": true
 }
